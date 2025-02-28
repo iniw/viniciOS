@@ -3,12 +3,11 @@
 
 use bootloader_api::{BootInfo, info::FrameBuffer};
 
+#[unsafe(no_mangle)]
 pub fn kernel_entry(boot_info: &'static mut BootInfo) -> ! {
-    let Some(framebuffer) = boot_info.framebuffer.as_mut().map(FrameBuffer::buffer_mut) else {
+    let Some(_) = boot_info.framebuffer.as_mut().map(FrameBuffer::buffer_mut) else {
         panic!("No framebuffer :(");
     };
-
-    framebuffer.fill(0x55);
 
     loop {}
 }

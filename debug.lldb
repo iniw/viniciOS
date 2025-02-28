@@ -1,0 +1,5 @@
+target create target/debug/kernicius
+target modules load --file kernicius --slide 0x8000000000
+gdb-remote localhost:1234
+b kernel_entry
+c

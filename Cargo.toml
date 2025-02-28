@@ -9,6 +9,7 @@ bootloader = "0.11"
 kernicius = { path = "kernicius", artifact = "bin", target = "x86_64-unknown-none" }
 
 [dependencies]
+clap = { version = "4.5.31", features = ["derive"] }
 # used for UEFI booting in QEMU
 ovmf-prebuilt = "0.1.0-alpha.1"
 

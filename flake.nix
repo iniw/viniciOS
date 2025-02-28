@@ -27,6 +27,7 @@
           packages = with pkgs; [
             rust-toolchain
             qemu
+            lldb
           ];
         };
       }
