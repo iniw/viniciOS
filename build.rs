@@ -1,4 +1,4 @@
-use bootloader::UefiBoot;
+use bootloader::{BootConfig, UefiBoot};
 use std::{env, path::PathBuf};
 
 fn main() {
@@ -9,7 +9,14 @@ fn main() {
     // https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies
     let kernel_path = PathBuf::from(env::var_os("CARGO_BIN_FILE_KERNICIUS_kernicius").unwrap());
 
+    let boot_config = {
+        let mut config = BootConfig::default();
+        config.frame_buffer_logging = false;
+        config
+    };
+
     UefiBoot::new(&kernel_path)
+        .set_boot_config(&boot_config)
         .create_disk_image(&uefi_path)
         .expect("Failed to create UEFI disk image");
 

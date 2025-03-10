@@ -31,6 +31,9 @@ fn main() {
         cmd.arg("-s").arg("-S");
     }
 
+    // Redirect the serial port to stdout
+    cmd.arg("-serial").arg("stdio");
+
     cmd.arg("-bios")
         .arg(ovmf_prebuilt::ovmf_pure_efi())
         .arg("-drive")
