@@ -3,12 +3,10 @@ use core::{
     ptr,
     sync::atomic::{AtomicPtr, AtomicUsize, Ordering},
 };
-
 use x86_64::{
     VirtAddr,
     structures::paging::{FrameAllocator, Mapper, Page, PageTableFlags, Size4KiB},
 };
-
 extern crate alloc;
 
 pub fn init(
