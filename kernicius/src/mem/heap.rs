@@ -7,6 +7,8 @@ use x86_64::{
     VirtAddr,
     structures::paging::{FrameAllocator, Mapper, Page, PageTableFlags, Size4KiB},
 };
+
+use crate::log;
 extern crate alloc;
 
 pub fn init(
@@ -21,7 +23,7 @@ pub fn init(
     let heap_end = Page::containing_address(heap_end);
     for page in Page::range_inclusive(heap_base, heap_end) {
         let Some(frame) = frame_allocator.allocate_frame() else {
-            // TODO: Log that there's no more physical memory available.
+            log::info!("Out of physical memory for heap pages");
             break;
         };
 

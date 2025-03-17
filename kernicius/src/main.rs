@@ -17,10 +17,6 @@ pub fn kernel_entry(boot_info: &'static mut BootInfo) -> ! {
     log::init(boot_info);
     mem::init(boot_info);
 
-    for i in 1..=50 {
-        log::info!("{}", i);
-    }
-
     let mut vec = Vec::with_capacity(20);
     for i in 0..10 {
         vec.push(i);
@@ -45,5 +41,6 @@ const fn bootloader_config() -> BootloaderConfig {
 
 #[panic_handler]
 fn kernel_panic(_info: &core::panic::PanicInfo) -> ! {
+    log::info!("[PANIC] - {}", _info);
     loop {}
 }
